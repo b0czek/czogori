@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--background);
+}
+
+.container {
+    display: flex;
+    box-sizing: border-box;
+}
+
+picture {
+    margin: auto;
+    position: relative;
+}
+
+.logo {
+    perspective-origin: left bottom;
+    transform: perspective(300px) rotateX(20deg) rotateY(-5deg) rotateZ(15deg);
+    position: absolute;
+    left: 21.7%;
+    top: 48.5%;
+    width: 3%;
+    height: 6%;
+}
+
+.cases {
+    position: absolute;
+    z-index: 9999;
+
+    top: 58%;
+    left: 17.65%;
+    perspective-origin: left top;
+    transform: perspective(500px) rotateX(-10deg) rotateY(-15deg) rotate(6.5deg);
+    /* transform: rotate(10deg);  */
+    width: 8.5%;
+    height: 4%;
+
+    perspective-origin: left top;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.casesText {
+    text-size-adjust: none;
+    font-size: 2em;
+    font-family: "Arial Narrow Bold", sans-serif;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    user-drag: none;
+}
+
+.chameleon {
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+
+    animation-name: chameleon;
+}
+
+@keyframes chameleon {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+
+:root,
+:root.light {
+    --background: white;
+    --image: url("daciasandero.jpg");
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: black;
+        --image: url("daciasanderonoc.jpg");
+    }
+}
+
+:root.dark {
+    --background: black;
+    --image: url("daciasanderonoc.jpg");
+}
+
+.stepway {
+    content: var(--image);
+}

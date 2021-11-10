@@ -66,3 +66,8 @@ const toggleDarkMode = () => {
 }
 dacia.addEventListener("dblclick", toggleDarkMode);
 initLightMode();
+
+
+if (document.location.href.split('?')[1].includes('sus=1')) {
+    dacia.style.content = 'url("daciasusero.png")';
+}

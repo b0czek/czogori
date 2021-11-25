@@ -61,7 +61,7 @@ picture {
 .chameleon {
     animation-duration: 1s;
     animation-timing-function: linear;
-    animation-iteration-count: 1;
+    animation-iteration-count: infinite;
 
     animation-name: chameleon;
 }

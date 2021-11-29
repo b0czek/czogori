@@ -37,15 +37,19 @@ picture {
     height: 4%;
 
     perspective-origin: left top;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .casesText {
     text-size-adjust: none;
     font-size: 2em;
     font-family: "Arial Narrow Bold", sans-serif;
+    min-width: 50px;
+}
+
+.casesIcon {
+    height: 32px;
+    width: 32px;
+    margin-right: 5px;
 }
 
 .unselectable {
@@ -57,7 +61,11 @@ picture {
     user-select: none;
     user-drag: none;
 }
-
+.centerChildren {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .chameleon {
     animation-duration: 1s;
     animation-timing-function: linear;
@@ -74,26 +82,4 @@ picture {
     100% {
         filter: hue-rotate(360deg);
     }
-}
-
-:root,
-:root.light {
-    --background: white;
-    --image: url("daciasandero.jpg");
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: black;
-        --image: url("daciasanderonoc.jpg");
-    }
-}
-
-:root.dark {
-    --background: black;
-    --image: url("daciasanderonoc.jpg");
-}
-
-.stepway {
-    content: var(--image);
 }

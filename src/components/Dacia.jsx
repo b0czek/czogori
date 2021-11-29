@@ -55,7 +55,6 @@ class Dacia extends React.Component {
     };
 
     toggleTheme = () => {
-        console.log("pizda");
         let newTheme = this.state.theme === "dark" ? "light" : "dark";
         this.setState({
             theme: newTheme,

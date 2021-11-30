@@ -3,10 +3,21 @@ body {
     padding: 0;
     background: var(--background);
 }
+#root {
+    height: 100vh;
+}
 
 .container {
+    height: 100%;
     display: flex;
     box-sizing: border-box;
+}
+
+.background-dark {
+    background-color: #111;
+}
+.background-light {
+    background-color: #fff;
 }
 
 picture {

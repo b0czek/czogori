@@ -5,8 +5,7 @@ import DaciaImg from "./DaciaImg";
 import Cases from "./Cases";
 import mocnyAmper from "../assets/sounds/mocnyamper.mp3";
 import "../style.css";
-
-const readBrowserTheme = () => (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+import { subscribeAsProp } from "../Appearance";
 
 //#region audio
 const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
@@ -32,7 +31,6 @@ class Dacia extends React.Component {
         data: {},
         displayedData: 0,
         dataRefreshing: false,
-        theme: localStorage.getItem("mode") ?? readBrowserTheme(),
     };
 
     refreshData = async () => {
@@ -52,14 +50,6 @@ class Dacia extends React.Component {
             audio.pause();
         }, timeout);
         await this.fetchData();
-    };
-
-    toggleTheme = () => {
-        let newTheme = this.state.theme === "dark" ? "light" : "dark";
-        this.setState({
-            theme: newTheme,
-        });
-        localStorage.setItem("mode", newTheme);
     };
 
     updateData = (data) => this.setState({ data: data.data[0] });
@@ -89,11 +79,12 @@ class Dacia extends React.Component {
     }
 
     render() {
+        console.log(this.props.appearance);
         return (
             <picture>
                 <DaciaImg
-                    theme={this.state.theme}
-                    onDoubleClick={this.toggleTheme}
+                    theme={this.props.appearance.theme}
+                    onDoubleClick={this.props.appearance.toggleTheme}
                     className={this.state.dataRefreshing ? "chameleon" : ""}
                 />
                 <div className="logo unselectable" id="logo" onClick={this.refreshData}>
@@ -110,4 +101,4 @@ class Dacia extends React.Component {
     }
 }
 
-export default Dacia;
+export default subscribeAsProp(Dacia);

@@ -18,3 +18,4 @@ const registerPush = async () => {
     console.log(await f.json());
 
 }
+export default registerPush;

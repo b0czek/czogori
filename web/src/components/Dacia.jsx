@@ -1,6 +1,5 @@
 import React from "react";
-import Papa from "papaparse";
-
+import apiProvider from "../apiProvider";
 import DaciaImg from "./DaciaImg";
 import Cases from "./Cases";
 import mocnyAmper from "../assets/sounds/mocnyamper.mp3";
@@ -52,24 +51,26 @@ class Dacia extends React.Component {
         await this.fetchData();
     };
 
-    updateData = (data) => this.setState({ data: data.data[0] });
-
-    async fetchData(completeCallback = this.updateData) {
-        let req = await fetch("https://api.dane.gov.pl/1.4/resources/33185,aktualne-dane-dla-wojewodztw");
-        let jsondata = await req.json();
-        let url = jsondata.data.attributes.link;
-        Papa.parse(url, {
-            download: true,
-            delimiter: ";",
-            header: true,
-            complete: completeCallback,
-        });
+    async fetchData() {
+        try {
+            let data = await apiProvider();
+            this.setState({ data });
+        } catch (err) {
+            this.setState({ data: {} });
+        }
     }
 
     carouselData = () => {
         this.setState({
             displayedData: (this.state.displayedData + 1) % displayableData.length,
         });
+    };
+
+    notificationHandler = async () => {
+        console.log("handled");
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
     };
 
     componentDidMount() {
@@ -79,7 +80,6 @@ class Dacia extends React.Component {
     }
 
     render() {
-        console.log(this.props.appearance);
         return (
             <picture>
                 <DaciaImg
@@ -87,7 +87,12 @@ class Dacia extends React.Component {
                     onDoubleClick={this.props.appearance.toggleTheme}
                     className={this.state.dataRefreshing ? "chameleon" : ""}
                 />
-                <div className="logo unselectable" id="logo" onClick={this.refreshData}>
+                <div
+                    className="logo unselectable"
+                    id="logo"
+                    onClick={this.refreshData}
+                    onDoubleClick={this.notificationHandler}
+                >
                     &nbsp;
                 </div>
                 <Cases

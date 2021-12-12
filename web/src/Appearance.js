@@ -8,7 +8,6 @@ const AppearanceState = () => {
     const [theme, setTheme] = React.useState(localStorage.getItem("mode") ?? readBrowserTheme());
 
     const toggleTheme = () => {
-        console.log('pizda');
         let newTheme = theme === "dark" ? "light" : "dark";
         setTheme(newTheme);
         localStorage.setItem("mode", newTheme);

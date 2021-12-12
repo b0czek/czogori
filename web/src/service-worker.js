@@ -68,39 +68,20 @@ self.addEventListener('message', (event) => {
     self.skipWaiting();
   }
 });
-
 // Any other custom service worker logic can go here.
-const publicVapidKey = 'BGuMX7RaVb9tdxTa6y7yVu74OaTzFZxkO3ZzmnLBieR8QnB6nfl3n62FRhdgCjbx9RpTPr2uCj9aRFvlRlTNodA';
-
-const registerPush = async () => {
-  const subscription = await self.registration.pushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey: publicVapidKey
-
-  })
-  console.log(subscription)
-  let f = await fetch("/api/subscribe", {
-    method: "POST",
-    body: JSON.stringify(subscription),
-    headers: {
-      "content-type": "application/json"
-    }
-  });
-  console.log(await f.text());
-
-
-
-}
-
+import registerPush from './registerPush';
 self.addEventListener("push", async e => {
-  await self.registration.showNotification('Czogori', {
-    body: `${e.data.text()}`,
-    icon: `${process.env.PUBLIC_URL + '/logo192.png'}`,
-    vibrate: [200, 500, 1000, 2000]
-  });
+  if (Notification.permission === "granted") {
+
+    await self.registration.showNotification('Czogori', {
+      body: `${e.data.text()}`,
+      icon: `${process.env.PUBLIC_URL + '/logo192.png'}`,
+      vibrate: [200, 500, 1000, 2000]
+    });
+  }
 });
 
-self.addEventListener('install', e => {
+self.addEventListener('activate', e => {
   registerPush();
 
 });

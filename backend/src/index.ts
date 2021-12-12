@@ -22,7 +22,7 @@ const main = async () => {
         console.log(`server started on ${port}`);
     });
 
-    const notifierInterval = notifier.init("19:30:00", orm.em);
+    const notifierInterval = notifier.init("10:30:20", orm.em);
 };
 
 main();

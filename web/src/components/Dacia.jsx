@@ -1,4 +1,5 @@
 import React from "react";
+import registerPush from "../registerPush";
 import apiProvider from "../apiProvider";
 import DaciaImg from "./DaciaImg";
 import Cases from "./Cases";
@@ -71,6 +72,7 @@ class Dacia extends React.Component {
         if (Notification.permission !== "granted") {
             Notification.requestPermission();
         }
+        registerPush().then(() => console.log("push registered"));
     };
 
     componentDidMount() {

@@ -72,7 +72,9 @@ class Dacia extends React.Component {
         if (Notification.permission !== "granted") {
             Notification.requestPermission();
         }
-        registerPush().then(() => console.log("push registered"));
+        const registration = await navigator.serviceWorker.getRegistration();
+
+        registerPush(registration).then(() => console.log("push registered"));
     };
 
     componentDidMount() {

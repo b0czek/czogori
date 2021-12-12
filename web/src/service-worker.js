@@ -82,7 +82,8 @@ self.addEventListener("push", async e => {
 });
 
 self.addEventListener('activate', e => {
-  registerPush();
+
+  registerPush(self.registration);
 
 });
 

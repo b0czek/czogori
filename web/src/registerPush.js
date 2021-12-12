@@ -1,8 +1,8 @@
 
 const publicVapidKey = 'BGuMX7RaVb9tdxTa6y7yVu74OaTzFZxkO3ZzmnLBieR8QnB6nfl3n62FRhdgCjbx9RpTPr2uCj9aRFvlRlTNodA';
 
-const registerPush = async () => {
-    const subscription = await self.registration.pushManager.subscribe({
+const registerPush = async (registration) => {
+    const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: publicVapidKey
 
@@ -15,7 +15,7 @@ const registerPush = async () => {
             "content-type": "application/json"
         }
     });
-    console.log(await f.json());
+    console.log(await f.text());
 
 }
 export default registerPush;

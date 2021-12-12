@@ -1,4 +1,15 @@
 version: '3.6'
 services:
   backend:
-    
+    image: "node:16-alpine"
+    user: "node"
+    working_dir: "/home/node/app"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./backend:/home/node/app
+    expose:
+      - "3001"
+    ports:
+      - 3001:3001
+    command: "npm start"

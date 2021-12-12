@@ -5,7 +5,8 @@
     "main": "dist/index.js",
     "scripts": {
         "start": "tsc && node dist/index.js",
-        "migrate": "mikro-orm migration:create --initial"
+        "migrate": "mikro-orm migration:create --initial",
+        "notify-test": "tsc && node dist/notifyTest.js"
     },
     "author": "",
     "license": "ISC",

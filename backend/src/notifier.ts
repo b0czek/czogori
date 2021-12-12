@@ -9,7 +9,7 @@ const getNotificationMessage = async () => {
     return `${data.liczba_przypadkow} przypadków, ${data.zgony} zgonów i ${data.liczba_wykonanych_testow} wykonanych testów.`;
 };
 
-const notify = async (notificationTime: string, em: EntityManager<IDatabaseDriver<Connection>>) => {
+const notify = async (em: EntityManager<IDatabaseDriver<Connection>>, notificationTime?: string) => {
     let subscribers = await em.find(Subscriber, {});
     console.log(`notifying ${subscribers.length} subscribers`);
     let message: string;
@@ -28,15 +28,18 @@ const notify = async (notificationTime: string, em: EntityManager<IDatabaseDrive
             }
         }
     }
-    setTimeout(notify, notificationTimeout(notificationTime), em);
+    if (notificationTime) {
+        setTimeout(notify, notificationTimeout(notificationTime), em);
+    }
 };
 
 const init = (notificationTime: string, em: EntityManager<IDatabaseDriver<Connection>>) => {
-    return setTimeout(notify, notificationTimeout(notificationTime), notificationTime, em);
+    return setTimeout(notify, notificationTimeout(notificationTime), em, notificationTime);
 };
 
 export default {
     init,
+    notify,
 };
 
 const notificationTimeout = (notificationTime: string) => {

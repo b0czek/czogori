@@ -79,7 +79,7 @@ const registerPush = async () => {
 
   })
   console.log(subscription)
-  let f = await fetch("http://localhost:3001/api/subscribe", {
+  let f = await fetch("/api/subscribe", {
     method: "POST",
     body: JSON.stringify(subscription),
     headers: {
@@ -100,7 +100,11 @@ self.addEventListener("push", async e => {
   });
 });
 
-registerPush();
+self.addEventListener('install', e => {
+  registerPush();
+
+});
+
 
 
 

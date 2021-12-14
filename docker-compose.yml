@@ -7,6 +7,7 @@ services:
     environment:
       - NODE_ENV=production
       - TZ=Europe/Warsaw
+      - EMAIL=dariusz.majnert@gmail.com
     volumes:
       - ./backend:/home/node/app
     expose:
@@ -15,3 +16,16 @@ services:
       - 3001:3001
     restart: unless-stopped
     command: "npm start"
+  proxy:
+    image: "nginx:stable-alpine"
+    links:
+      - "backend:api"
+    volumes:
+      - ./web/build:/web
+      - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    restart: unless-stopped
+# networks:
+#   czogori-network:
+#     external: true

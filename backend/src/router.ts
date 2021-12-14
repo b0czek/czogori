@@ -2,6 +2,7 @@ import { Connection, EntityManager, IDatabaseDriver } from "@mikro-orm/core";
 
 import { Router } from "express";
 import { Subscriber } from "./entities/Subscriber";
+import { publicVapidKey } from "./keys";
 
 export const getRouter = (em: EntityManager<IDatabaseDriver<Connection>>): Router => {
     let router = Router();
@@ -27,9 +28,18 @@ export const getRouter = (em: EntityManager<IDatabaseDriver<Connection>>): Route
             res.status(400).json({ error: true });
         }
     });
+
     router.get("/", (req, res) => {
         return res.status(200).json({ ok: true });
     });
+
+    router.get("/publicKey", (req, res) => {
+        return res.status(publicVapidKey ? 200 : 500).json({
+            error: publicVapidKey === null,
+            publicVapidKey: publicVapidKey,
+        });
+    });
+
     return router;
 };
 

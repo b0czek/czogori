@@ -1,7 +1,14 @@
 
-const publicVapidKey = 'BGuMX7RaVb9tdxTa6y7yVu74OaTzFZxkO3ZzmnLBieR8QnB6nfl3n62FRhdgCjbx9RpTPr2uCj9aRFvlRlTNodA';
 
 const registerPush = async (registration) => {
+    let keyReq = await (await fetch('/api/publicVapidKey')).json();
+    if (keyReq.error) {
+        console.error('could not read server public vapid key');
+        return;
+    }
+
+    const publicVapidKey = keyReq.publicVapidKey;
+
     const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: publicVapidKey

@@ -6,10 +6,12 @@ services:
     working_dir: "/home/node/app"
     environment:
       - NODE_ENV=production
+      - TZ=Europe/Warsaw
     volumes:
       - ./backend:/home/node/app
     expose:
       - "3001"
     ports:
       - 3001:3001
+    restart: unless-stopped
     command: "npm start"

@@ -1,7 +1,7 @@
 
 
 const registerPush = async (registration) => {
-    let keyReq = await (await fetch('/api/publicVapidKey')).json();
+    let keyReq = await (await fetch('/api/publicKey')).json();
     if (keyReq.error) {
         console.error('could not read server public vapid key');
         return;

@@ -12,8 +12,6 @@ services:
       - ./backend:/home/node/app
     expose:
       - "3001"
-    ports:
-      - 3001:3001
     restart: unless-stopped
     command: "npm start"
   proxy:

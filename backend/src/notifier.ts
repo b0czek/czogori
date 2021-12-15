@@ -28,8 +28,9 @@ const notify = async (em: EntityManager<IDatabaseDriver<Connection>>, notificati
             }
         }
     }
+    console.log("done notifying");
     if (notificationTime) {
-        setTimeout(notify, notificationTimeout(notificationTime), em);
+        setTimeout(notify, notificationTimeout(notificationTime), em, notificationTime);
     }
 };
 

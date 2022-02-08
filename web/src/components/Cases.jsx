@@ -10,9 +10,11 @@ const Cases = ({ data, displayedData, dataRefreshing, onClick }) => {
                 ref={(el) => el && el.style.setProperty("color", "#000", "important")}
             >
                 <div>
-                    <CasesIcon displayedData={displayedData} />
+                    <CasesIcon icon={displayedData.icon} />
                 </div>
-                <div className="unselectable">{dataRefreshing ? "-" : formatCases(data[displayedData] ?? "-")}</div>
+                <div className="unselectable">
+                    {dataRefreshing ? "-" : formatCases(data[displayedData.name] ?? "-")}
+                </div>
             </div>
         </div>
     );

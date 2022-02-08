@@ -6,7 +6,7 @@ import { Subscriber } from "./entities/Subscriber";
 const getNotificationMessage = async () => {
     let data = await apiProvider();
 
-    return `${data.liczba_przypadkow} przypadków, ${data.zgony} zgonów i ${data.liczba_wykonanych_testow} wykonanych testów.`;
+    return `${data.liczba_wszystkich_zakazen} przypadków, ${data.zgony} zgonów i ${data.liczba_wykonanych_testow} wykonanych testów.`;
 };
 
 const notify = async (em: EntityManager<IDatabaseDriver<Connection>>, notificationTime?: string) => {
@@ -16,13 +16,14 @@ const notify = async (em: EntityManager<IDatabaseDriver<Connection>>, notificati
     try {
         message = await getNotificationMessage();
     } catch (err) {
-        console.error("could not retrieve ApiData");
+        console.error("could not retrieve api data");
         return;
     }
     for (let sub of subscribers) {
         try {
             await webpush.sendNotification(JSON.parse(sub.payload), message);
         } catch (err) {
+            // remove subscriber if their data expired
             if (err instanceof WebPushError && err.statusCode == 410) {
                 await em.removeAndFlush(sub);
             }

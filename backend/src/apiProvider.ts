@@ -22,8 +22,12 @@ export default apiProvider;
 
 export interface Data {
     wojewodztwo: string;
-    liczba_przypadkow: string;
-    liczba_na_10_tys_mieszkancow: string;
+    liczba_nowych_zakazen: string;
+    liczba_ponownych_zakazen: string;
+    liczba_wszystkich_zakazen: string;
+    liczba_nowych_zakazen_na_10_tys_mieszkancow: string;
+    liczba_ponownych_zakazen_na_10_tys_mieskzancow: string;
+    liczba_wszystkich_zakazen_na_10_tys_mieskzancow: string;
     zgony: string;
     zgony_w_wyniku_covid_bez_chorob_wspolistniejacych: string;
     zgony_w_wyniku_covid_i_chorob_wspolistniejacych: string;

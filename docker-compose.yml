@@ -14,16 +14,19 @@ services:
       - "3001"
     restart: unless-stopped
     command: "npm start"
+    networks:
+      - czogori-network
   proxy:
     image: "nginx:stable-alpine"
-    links:
-      - "backend:api"
     volumes:
       - ./web/build:/web
       - ./etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       - 8080:80
     restart: unless-stopped
-# networks:
-#   czogori-network:
-#     external: true
+    networks:
+      - czogori-network
+
+networks:
+  czogori-network:
+    driver: bridge

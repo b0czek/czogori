@@ -7,6 +7,10 @@ import mocnyAmper from "../assets/sounds/mocnyamper.mp3";
 import "../style.css";
 import { subscribeAsProp } from "../Appearance";
 
+import grave from "../assets/icons/grave.svg";
+import virus from "../assets/icons/virus.svg";
+import microscope from "../assets/icons/microscope.svg";
+
 //#region audio
 const random = (min, max) => Math.floor(Math.random() * (max - min) + min);
 const audioFade = (audio, duration, step) => {
@@ -24,12 +28,25 @@ const audioFade = (audio, duration, step) => {
 const fadeDuration = 1000;
 //#endregion audio
 
-const displayableData = ["liczba_przypadkow", "zgony", "liczba_wykonanych_testow"];
+const displayableData = [
+    {
+        name: "liczba_wszystkich_zakazen",
+        icon: virus,
+    },
+    {
+        name: "zgony",
+        icon: grave,
+    },
+    {
+        name: "liczba_wykonanych_testow",
+        icon: microscope,
+    },
+];
 
 class Dacia extends React.Component {
     state = {
         data: {},
-        displayedData: 0,
+        displayedDataIdx: 0,
         dataRefreshing: false,
     };
 
@@ -63,7 +80,7 @@ class Dacia extends React.Component {
 
     carouselData = () => {
         this.setState({
-            displayedData: (this.state.displayedData + 1) % displayableData.length,
+            displayedDataIdx: (this.state.displayedDataIdx + 1) % displayableData.length,
         });
     };
 
@@ -84,6 +101,7 @@ class Dacia extends React.Component {
     }
 
     render() {
+        console.log(displayableData[this.state.displayedDataIdx]);
         return (
             <picture>
                 <DaciaImg
@@ -102,7 +120,7 @@ class Dacia extends React.Component {
                 <Cases
                     data={this.state.data}
                     dataRefreshing={this.state.dataRefreshing}
-                    displayedData={displayableData[this.state.displayedData]}
+                    displayedData={displayableData[this.state.displayedDataIdx]}
                     onClick={this.carouselData}
                 />
             </picture>

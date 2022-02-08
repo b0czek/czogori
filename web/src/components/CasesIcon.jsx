@@ -1,21 +1,5 @@
-import grave from "../assets/icons/grave.svg";
-import virus from "../assets/icons/virus.svg";
-import microscope from "../assets/icons/microscope.svg";
-const getIcon = (displayedData) => {
-    switch (displayedData) {
-        case "zgony":
-            return grave;
-        case "liczba_przypadkow":
-            return virus;
-        case "liczba_wykonanych_testow":
-            return microscope;
-        default:
-            return null;
-    }
-};
-
-const CasesIcon = ({ displayedData }) => {
-    let icon = getIcon(displayedData);
+const CasesIcon = ({ icon }) => {
+    console.log(icon);
     if (icon) {
         return (
             <div className="centerChildren unselectable">

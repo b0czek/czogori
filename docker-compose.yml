@@ -3,6 +3,7 @@ services:
   backend:
     image: "node:16-alpine"
     user: "node"
+    hostname: "backend"
     working_dir: "/home/node/app"
     environment:
       - NODE_ENV=production

@@ -18,7 +18,7 @@ export const getRouter = (em: EntityManager<IDatabaseDriver<Connection>>): Route
             if (!exists) {
                 console.log(`new subscriber, id ${req.body.endpoint.slice(-16)}`);
                 const subscriber = em.create(Subscriber, {
-                    payload: req.body,
+                    payload: JSON.stringify(req.body),
                 });
                 await em.persistAndFlush(subscriber);
                 res.status(201).json({ error: false });
